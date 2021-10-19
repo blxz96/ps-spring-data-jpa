@@ -67,4 +67,6 @@ public class TicketType {
     public void setTicketPrices(List<TicketPrice> ticketPrices) {
         this.ticketPrices = ticketPrices;
     }
+
+
 }
