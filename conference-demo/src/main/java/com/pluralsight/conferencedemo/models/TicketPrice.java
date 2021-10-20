@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+//Note we can add NamedQueries and NamedNativeQuery in JPA Entities
 @Entity
 @Table(name = "ticket_prices")
 @NamedQuery(

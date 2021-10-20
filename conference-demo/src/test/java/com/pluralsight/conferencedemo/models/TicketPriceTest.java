@@ -14,9 +14,11 @@ import javax.transaction.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class TicketPriceTest {
@@ -58,6 +60,24 @@ public class TicketPriceTest {
         assertEquals(BigDecimal.valueOf(200, 2), otherTp.getBasePrice());
 
         repository.deleteById(otherTp.getTicketPriceId());
+    }
+
+    @Test
+    public void testQueryAnnotation() throws Exception{
+        List<TicketPrice> tickets = repository.getTicketsUnderPriceWithWorkshops(BigDecimal.valueOf(1000));
+        assertTrue(tickets.size()>0);
+    }
+
+    @Test
+    public void testNamedQuery() throws Exception{
+        List<TicketPrice> tickets = repository.namedFindTicketsByPricingCategoryName("Regular");
+        assertTrue(tickets.size()==3);
+    }
+
+    @Test
+    public void testNamedNativeQuery() throws Exception{
+        List<TicketPrice> tickets = repository.nativeFindTicketsByCategoryWithWorkshop("Early Bird");
+        assertTrue(tickets.size()==1);
     }
 
 }
